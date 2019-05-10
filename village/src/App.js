@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Route, NavLink } from 'react-router-dom';
 
 import './App.css';
-import { Container, Navbar, Row, Col } from 'reactstrap';
+import { Container, Navbar } from 'reactstrap';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
 
@@ -52,7 +52,7 @@ class App extends Component {
       <div className="App">
         <Container>
           <Navbar>
-            let's get smurfy
+            <h2>Let's Get Smurfy</h2>
             <br />
             <NavLink to='/'>Return to List</NavLink>
             <NavLink to='/smurf-form'>Add New Smurf</NavLink>
