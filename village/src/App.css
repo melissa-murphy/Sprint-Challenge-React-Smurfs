@@ -2,6 +2,11 @@
   text-align: center;
 }
 
-h1, h2 {
-  font-variant: small-caps; 
+h1,
+h2 {
+  font-variant: small-caps;
+}
+
+.NavLink {
+  padding: 2rem;
 }

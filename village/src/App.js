@@ -47,6 +47,15 @@ class App extends Component {
     return this.state.smurfs;
   }
 
+  // Remove Smurfs
+  removeSmurfs = (id) => {
+    axios.delete(`http://localhost:3333/smurfs/${id}`)
+    .then(res => {
+      this.setState(() => ({ smurfs: res.data }))
+    })
+    .catch(err => console.log(err))
+  }
+
   render() {
     return (
       <div className="App">
