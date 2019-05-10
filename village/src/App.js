@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import { Route } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 
 import './App.css';
+import { Container, Navbar, Row, Col } from 'reactstrap';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
 
@@ -49,20 +50,27 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* <SmurfForm smurfs={this.smurfsOnState} /> */}
-        {/* <Smurfs smurfs={this.state.smurfs} /> */}
+        <Container>
+          <Navbar>
+            let's get smurfy
+            <br />
+            <NavLink to='/'>Return to List</NavLink>
+            <NavLink to='/smurf-form'>Add New Smurf</NavLink>
+          </Navbar>
+          {/* <SmurfForm smurfs={this.smurfsOnState} /> */}
+          {/* <Smurfs smurfs={this.state.smurfs} /> */}
 
-        {/* Routes */}
-        <Route
-          exact
-          path="/"
-          render={props => <Smurfs {...props} smurfs={this.smurfsOnState()} />}
-        />
-        <Route
-          exact
-          path="/add-smurf"
-          render={props => <SmurfForm {...props} />}
-        />
+          {/* Routes */}
+
+          <Route
+            exact
+            path="/"
+            render={props => (
+              <Smurfs {...props} smurfs={this.smurfsOnState()} />
+            )}
+          />
+          <Route path="/smurf-form" render={props => <SmurfForm {...props} />} />
+        </Container>
       </div>
     );
   }
