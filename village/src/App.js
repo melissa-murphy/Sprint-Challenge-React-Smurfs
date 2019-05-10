@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import { Route } from 'react-router-dom';
+
 import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
@@ -34,25 +36,38 @@ class App extends Component {
   // Current Smurfs
   smurfsOnState() {
     axios
-     .get(`http://localhost:3333/smurfs`)
-     .then(res => {
-       this.setState(() => ({ smurfs: res.data }));
-     })
-     .catch(err => {
-       console.log(err);
-     });
-     return this.state.smurfs
- }
+      .get(`http://localhost:3333/smurfs`)
+      .then(res => {
+        this.setState(() => ({ smurfs: res.data }));
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    return this.state.smurfs;
+  }
 
   render() {
     return (
       <div className="App">
-        <SmurfForm smurfs={this.smurfsOnState} />
-        <Smurfs smurfs={this.state.smurfs} />
+        {/* <SmurfForm smurfs={this.smurfsOnState} /> */}
+        {/* <Smurfs smurfs={this.state.smurfs} /> */}
+
+        {/* Routes */}
+        <Route exact path="/" component={App} />
+        <Route
+          exact
+          path="/smurfs"
+          render={props => <Smurfs {...props} smurfs={this.state.smurfs} />}
+        />
+        <Route
+          exact
+          path
+          to="/add-smurf"
+          render={props => <SmurfForm {...props} smurfs={this.smurfsOnState} />}
+        />
       </div>
     );
   }
 }
 
 export default App;
- 
