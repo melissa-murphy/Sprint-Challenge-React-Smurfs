@@ -31,10 +31,23 @@ class App extends Component {
     console.log(`bottom of CDM`);
   }
 
+  // Current Smurfs
+  smurfsOnState() {
+    axios
+     .get(`http://localhost:3333/smurfs`)
+     .then(res => {
+       this.setState(() => ({ smurfs: res.data }));
+     })
+     .catch(err => {
+       console.log(err);
+     });
+     return this.state.smurfs
+ }
+
   render() {
     return (
       <div className="App">
-        <SmurfForm />
+        <SmurfForm smurfs={this.smurfsOnState} />
         <Smurfs smurfs={this.state.smurfs} />
       </div>
     );
