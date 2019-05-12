@@ -38,22 +38,21 @@ class App extends Component {
   smurfsOnState() {
     axios
       .get(`http://localhost:3333/smurfs`)
+      // .then(res => {
+      //   this.setState(() => ({ smurfs: res.data }));
+      // trying to stop the constant requests, but it seems that is something
+      // more easily done with redux?
       .then(res => {
-        this.setState(() => ({ smurfs: res.data }));
+        if (res === this.state.smurfs) {
+          console.log('move along, nothing to see here');
+        } else {
+          this.setState(() => ({ smurfs: res.data }));
+        }
       })
       .catch(err => {
         console.log(err);
       });
     return this.state.smurfs;
-  }
-
-  // Remove Smurfs
-  removeSmurfs = (id) => {
-    axios.delete(`http://localhost:3333/smurfs/${id}`)
-    .then(res => {
-      this.setState(() => ({ smurfs: res.data }))
-    })
-    .catch(err => console.log(err))
   }
 
   render() {
@@ -62,23 +61,24 @@ class App extends Component {
         <Container>
           <Navbar>
             <h2>Let's Get Smurfy</h2>
-            <br />
-            <NavLink to='/'>Return to List</NavLink>
-            <NavLink to='/smurf-form'>Add New Smurf</NavLink>
+            <NavLink to="/">Return to List</NavLink>
+            <NavLink to="/smurf-form">Add New Smurf</NavLink>
           </Navbar>
           {/* <SmurfForm smurfs={this.smurfsOnState} /> */}
           {/* <Smurfs smurfs={this.state.smurfs} /> */}
 
           {/* Routes */}
-
           <Route
             exact
             path="/"
             render={props => (
-              <Smurfs {...props} smurfs={this.smurfsOnState()} removeSmurf={this.removeSmurfs()} />
+              <Smurfs {...props} smurfs={this.smurfsOnState()} />
             )}
           />
-          <Route path="/smurf-form" render={props => <SmurfForm {...props} />} />
+          <Route
+            path="/smurf-form"
+            render={props => <SmurfForm {...props} />}
+          />
         </Container>
       </div>
     );
