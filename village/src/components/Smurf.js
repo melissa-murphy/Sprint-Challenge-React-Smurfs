@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from 'react';
 import { Button } from 'reactstrap';
 
@@ -14,7 +15,15 @@ const Smurf = props => {
   );
 };
 
+Smurf.propTypes = {
+  age: PropTypes.string,
+  height: PropTypes.string,
+  id: PropTypes.number,
+  name: PropTypes.string
+}
+
 Smurf.defaultProps = {
+  id: 0,
   name: '',
   height: '',
   age: ''

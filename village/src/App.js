@@ -7,6 +7,7 @@ import './App.css';
 import { Container, Navbar } from 'reactstrap';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
+import Smurf from './components/Smurf';
 
 class App extends Component {
   constructor(props) {
@@ -43,12 +44,8 @@ class App extends Component {
       // trying to stop the constant requests, but it seems that is something
       // more easily done with redux?
       .then(res => {
-        if (res === this.state.smurfs) {
-          console.log('move along, nothing to see here');
-        } else {
           this.setState(() => ({ smurfs: res.data }));
-        }
-      })
+              })
       .catch(err => {
         console.log(err);
       });
@@ -72,13 +69,23 @@ class App extends Component {
             exact
             path="/"
             render={props => (
-              <Smurfs {...props} smurfs={this.smurfsOnState()} />
+              <Smurfs
+                {...props}
+                smurfs={this.smurfsOnState()}
+              />
             )}
           />
           <Route
             path="/smurf-form"
             render={props => <SmurfForm {...props} />}
           />
+          <Route
+            exact
+            path='/smurf'
+            render={props => (
+              <Smurf {...props} />
+            )}
+           />
         </Container>
       </div>
     );
