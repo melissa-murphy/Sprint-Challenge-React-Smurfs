@@ -4,6 +4,11 @@ import { Button } from 'reactstrap';
 
 import './smurf.css';
 
+// removeSmurfs = event => {
+//   event.preventDefault();
+
+// }
+
 const Smurf = props => {
   return (
     <div className="Smurf">
@@ -16,7 +21,7 @@ const Smurf = props => {
 };
 
 Smurf.propTypes = {
-  age: PropTypes.string,
+  age: PropTypes.any,
   height: PropTypes.string,
   id: PropTypes.number,
   name: PropTypes.string

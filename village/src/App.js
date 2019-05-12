@@ -44,13 +44,23 @@ class App extends Component {
       // trying to stop the constant requests, but it seems that is something
       // more easily done with redux?
       .then(res => {
-          this.setState(() => ({ smurfs: res.data }));
-              })
+        this.setState(() => ({ smurfs: res.data }));
+      })
       .catch(err => {
         console.log(err);
       });
     return this.state.smurfs;
   }
+
+  // Remove Smurfs
+  removeSmurfs = id => {
+    axios
+      .delete(`http://localhost:3333/smurfs/${id}`)
+      .then(res => {
+        this.setState(() => ({ smurfs: res.data }));
+      })
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
@@ -69,23 +79,20 @@ class App extends Component {
             exact
             path="/"
             render={props => (
-              <Smurfs
-                {...props}
-                smurfs={this.smurfsOnState()}
-              />
+              <Smurfs {...props} smurfs={this.smurfsOnState()} />
+            )}
+          />
+          <Route
+            exact
+            path={`/smurf/${id}`}
+            render={props => (
+              <Smurf {...props} removeSmurfs={this.removeSmurfs} />
             )}
           />
           <Route
             path="/smurf-form"
             render={props => <SmurfForm {...props} />}
           />
-          <Route
-            exact
-            path='/smurf'
-            render={props => (
-              <Smurf {...props} />
-            )}
-           />
         </Container>
       </div>
     );
