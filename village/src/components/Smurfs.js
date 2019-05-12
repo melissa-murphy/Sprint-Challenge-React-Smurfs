@@ -11,7 +11,7 @@ class Smurfs extends Component {
   removeSmurfs = (ev, id) => {
     console.log(ev);
     axios
-      .delete(`http://localhost:3333/smurfs/${id}`, { params: { smurfs: id } })
+      .delete(`http://localhost:3333/smurfs/${id}`, { params: { id: smurfs.id } })
       .then(res => {
         this.setState(() => ({ smurfs: res.data }));
       })
